@@ -176,7 +176,7 @@ sample_sizes = np.arange(5, 51, 3)
 criteria = ["mae", "mse", "friedman_mse"]
 
 # Number of times to repeat each simulation setting
-n_repeats = 30
+n_repeats = 10
 
 # Create the parameter space
 params = product(simulation_names, sample_sizes, criteria, range(n_repeats))
@@ -210,7 +210,7 @@ for sim in simulation_names:
                           n_dimensions, n_repeats)
 
 # Run the simulations in parallel
-data = Parallel(n_jobs=-2)(
+data = Parallel(n_jobs=-1)(
     delayed(main)(sim_name, sim_data[sim_name][n_iter], n, crit,
                   n_dimensions, n_iter)
     for sim_name, n, crit, n_iter in params
